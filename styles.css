@@ -8,13 +8,39 @@
 
 /* Body Styling */
 body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: #1b1b1b;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
     color: #fff;
+    position: relative;
+}
+
+/* Background Animation */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #764ba2, #667eea, #1b1b1b);
+    animation: moveBackground 20s linear infinite;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 /* Container Styling */
@@ -28,7 +54,7 @@ body {
     font-size: 4em;
     letter-spacing: 2px;
     margin-bottom: 10px;
-    animation: slideIn 1.5s forwards;
+    animation: neonGlow 2s alternate infinite;
 }
 
 /* Role Styling */
@@ -42,18 +68,53 @@ body {
 .linkedin-link {
     display: inline-block;
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 15px 30px;
     background-color: #0e76a8;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 30px;
+    font-size: 1.1em;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.linkedin-link::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #fff, #0e76a8, #fff, #0e76a8);
+    animation: animateGradient 3s linear infinite;
+    transform: rotate(45deg);
+    opacity: 0.4;
 }
 
 .linkedin-link:hover {
-    background-color: #084d6e;
-    transform: scale(1.05);
+    box-shadow: 0 0 20px #0e76a8;
+    transform: scale(1.1);
+}
+
+/* Neon Glow Animation */
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #764ba2, 0 0 20px #667eea;
+    }
+    50% {
+        text-shadow: 0 0 10px #fff, 0 0 30px #764ba2, 0 0 40px #667eea;
+    }
+}
+
+/* Background Animation for Button */
+@keyframes animateGradient {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* Keyframe Animations */
@@ -62,17 +123,6 @@ body {
         opacity: 0;
     }
     to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideIn {
-    0% {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
         opacity: 1;
     }
 }
@@ -88,7 +138,8 @@ body {
     }
 
     .linkedin-link {
-        font-size: 0.9em;
+        font-size: 1em;
+        padding: 12px 25px;
     }
 }
 
@@ -102,6 +153,6 @@ body {
     }
 
     .linkedin-link {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 }
